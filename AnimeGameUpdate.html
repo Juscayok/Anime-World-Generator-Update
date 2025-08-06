@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anime World Generator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 10px;
+      background-color: #f0f0f0;
+      background-image: url('pictures/Anime.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      color: #000;
+      text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+      box-sizing: border-box;
+    }
+    .card {
+      margin: 20px auto;
+      padding: 15px;
+      border: 2px solid #333;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 400px;
+      background-color: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    button {
+      padding: 8px 16px;
+      margin: 5px;
+      font-size: 14px;
+      cursor: pointer;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      min-width: 120px;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    .random-btn {
+      background-color: #ff9800;
+    }
+    .random-btn:hover {
+      background-color: #e68900;
+    }
+    .stat {
+      font-weight: bold;
+      margin: 8px 0;
+    }
+    .results, .challenge {
+      margin: 20px auto;
+      padding: 15px;
+      border: 2px solid #333;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 400px;
+      background-color: rgba(255, 255, 255, 0.9);
+    }
+    img {
+      vertical-align: middle;
+      margin-left: 5px;
+      max-width: 40px;
+      max-height: 40px;
+      object-fit: contain;
+    }
+    .challenge-with-bg {
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      color: #fff;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+    }
+    .results-with-bg {
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      color: #fff;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+    .game-with-bg {
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      color: #fff;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+    .combat-log {
+      background: rgba(0,0,0,0.05);
+      border-radius: 8px;
+      padding: 10px;
+      margin: 10px 0;
+      text-align: left;
+      max-height: 200px;
+      overflow-y: auto;
+      font-size: 0.95em;
+    }
+    .back-btn {
+      float: left;
+      margin-right: 10px;
+      background-color: #888;
+      color: #fff;
+      min-width: 80px;
+    }
+    .back-btn:hover {
+      background-color: #555;
+    }
+    @media (max-width: 600px) {
+      h1, h2 {
+        font-size: 1.5em;
+      }
+      button {
+        display: block;
+        margin: 5px auto;
+        width: 80%;
+        font-size: 12px;
+      }
+      .card, .results, .challenge {
+        width: 95%;
+        padding: 10px;
+      }
+      img {
+        max-width: 30px;
+        max-height: 30px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Anime World Generator</h1>
+  <div class="card" id="game">
+    <h2 id="currentStep">Click Start to Begin Your Journey!</h2>
+    <input type="text" id="charNameInput" placeholder="Enter your character's name" style="margin-bottom:10px;display:none;">
+    <button id="actionBtn">Start</button>
+  </div>
+  <div class="results" id="results" style="display: none;">
+    <h2>Your Character Stats</h2>
+    <button id="backBtnResults" class="back-btn" style="display:none;">Back</button>
+    <p id="charName"></p>
+    <p id="universe"></p>
+    <p id="race"></p>
+    <p id="transformation"></p>
+    <p id="power"></p>
+    <p id="attack"></p>
+    <p id="defense"></p>
+    <p id="specialAttack"></p>
+    <p id="powerLevel"></p>
+    <p id="speed"></p>
+    <p id="durability"></p>
+    <p id="agility"></p>
+  </div>
+  <div class="challenge" id="challenge" style="display: none;">
+    <h2>Story Challenge</h2>
+    <button id="backBtnChallenge" class="back-btn" style="display:none;">Back</button>
+    <p id="challengeText"></p>
+    <h3>Villain Stats</h3>
+    <p id="villainStats"></p>
+    <h3>Combat Log</h3>
+    <div id="combatLog" class="combat-log"></div>
+    <h3>Fight Conclusion</h3>
+    <p id="fightConclusion"></p>
+    <p id="challengeResult"></p>
+    <button id="playAgainBtn">Play Again</button>
+    <button id="challengeAnotherBtn" style="display:none;">Challenge Another Boss</button>
+  </div>
+  <script>
+    // All universes restored
+const universes = [
+  {
+    name: "Naruto",
+    races: ["Human", "Uchiha", "Senju", "Hyuga", "Jinchuriki", "Uzumaki", "Sarutobi", "Inuzuka", "Aburame", "Nara"],
+    transformations: ["Sage Mode", "Sharingan", "Byakugan", "Tailed Beast Cloak", "None", "Sage of Six Paths", "Mangekyo Sharingan", "Eight Gates", "Curse Mark", "Jutsu Absorption"],
+    powers: ["Rasengan", "Chidori", "Shadow Clone", "Gentle Fist", "Sand Manipulation", "Fireball Jutsu", "Water Dragon", "Earth Wall", "Wind Scythe", "Summoning Jutsu"],
+    speeds: ["Lightning", "Swift", "Quick", "Moderate", "Steady", "Rapid", "Fleet", "Brisk", "Hasty", "Speedy"],
+    durabilities: ["Unyielding", "Resilient", "Tough", "Solid", "Average", "Unshakable", "Hardened", "Sturdy", "Robust", "Steadfast"],
+    agilities: ["Agile", "Nimble", "Graceful", "Balanced", "Stable", "Dexterous", "Lithe", "Supple", "Evasive", "Flexible"],
+    villains: ["Madara Uchiha", "Orochimaru", "Pain", "Sasori", "Kakuzu"],
+    bgImage: "Naruto.png"
+  },
+  {
+    name: "Dragon Ball",
+    races: ["Saiyan", "Human", "Namekian", "Android", "Frieza Race", "Majin", "Supreme Kai", "Demon", "Yardrat", "Tuffle"],
+    transformations: ["Super Saiyan", "Great Ape", "Golden Form", "Unlocked Potential", "None", "Super Saiyan God", "Super Saiyan Blue", "Ultra Instinct", "Super Saiyan 4", "Legendary Super Saiyan"],
+    powers: ["Kamehameha", "Final Flash", "Destructo Disc", "Special Beam Cannon", "Masenko", "Spirit Bomb", "Galick Gun", "Big Bang Attack", "Death Beam", "Energy Blast Volley"],
+    speeds: ["Lightning", "Swift", "Quick", "Moderate", "Steady", "Rapid", "Fleet", "Brisk", "Hasty", "Speedy"],
+    durabilities: ["Unyielding", "Resilient", "Tough", "Solid", "Average", "Unshakable", "Hardened", "Sturdy", "Robust", "Steadfast"],
+    agilities: ["Agile", "Nimble", "Graceful", "Balanced", "Stable", "Dexterous", "Lithe", "Supple", "Evasive", "Flexible"],
+    villains: ["Frieza", "Cell", "Majin Buu", "Broly", "Beerus"],
+    bgImage: "DBZ.png"
+  },
+  {
+    name: "One Piece",
+    races: ["Human", "Fishman", "Giant", "Mink", "Cyborg", "Merfolk", "Sky Islander", "Lunarian", "Tontatta", "Longarm"],
+    transformations: ["Gear Second", "Sulong", "Monster Point", "Awakened Zoan", "None", "Gear Third", "Gear Fourth", "Haki Awakening", "Gear Fifth", "Hybrid Form"],
+    powers: ["Gum-Gum Pistol", "Fishman Karate", "Haki Strike", "Electro", "Cyborg Blast", "Gum-Gum Rocket", "Swordsman Slash", "Magma Fist", "Ice Block", "Thunder Bolt"],
+    speeds: ["Lightning", "Swift", "Quick", "Moderate", "Steady", "Rapid", "Fleet", "Brisk", "Hasty", "Speedy"],
+    durabilities: ["Unyielding", "Resilient", "Tough", "Solid", "Average", "Unshakable", "Hardened", "Sturdy", "Robust", "Steadfast"],
+    agilities: ["Agile", "Nimble", "Graceful", "Balanced", "Stable", "Dexterous", "Lithe", "Supple", "Evasive", "Flexible"],
+    villains: ["Blackbeard", "Akainu", "Doflamingo", "Kaido", "Big Mom"],
+    bgImage: "OP.png"
+  },
+  {
+    name: "Attack on Titan",
+    races: ["Eldian", "Marleyan", "Titan Shifter", "Ackerman", "Human", "Yeagerist", "Survey Corps", "Warrior", "Royal Blood", "Subject of Ymir"],
+    transformations: ["Colossal Titan", "Armored Titan", "Female Titan", "Beast Titan", "None", "Attack Titan", "War Hammer Titan", "Cart Titan", "Jaw Titan", "Founding Titan"],
+    powers: ["Titan Roar", "Hardening Strike", "Steam Blast", "Crystal Cage", "Boulder Throw", "Titan Bite", "Wall Smash", "Thunder Spear", "Blade Slash", "Mind Control"],
+    speeds: ["Lightning", "Swift", "Quick", "Moderate", "Steady", "Rapid", "Fleet", "Brisk", "Hasty", "Speedy"],
+    durabilities: ["Unyielding", "Resilient", "Tough", "Solid", "Average", "Unshakable", "Hardened", "Sturdy", "Robust", "Steadfast"],
+    agilities: ["Agile", "Nimble", "Graceful", "Balanced", "Stable", "Dexterous", "Lithe", "Supple", "Evasive", "Flexible"],
+    villains: ["Zeke Yeager", "Reiner Braun", "Annie Leonhart", "Bertholdt Hoover", "Eren Yeager"],
+    bgImage: "AOT.png"
+  },
+  {
+    name: "My Hero Academia",
+    races: ["Human", "Quirk User", "Mutant", "Nomu", "Villain Hybrid", "Hero Trainee", "Pro Hero", "Quirkless", "Enhanced Human", "Experiment"],
+    transformations: ["One For All", "Explosion Mode", "Dark Shadow", "Muscle Augmentation", "None", "Engine Boost", "Hardening Form", "Zero Gravity", "Electrification", "Half-Hot Half-Cold"],
+    powers: ["Detroit Smash", "Explosion Blast", "Shadow Claw", "Muscle Punch", "Gravity Lift", "Electric Surge", "Ice Wall", "Fire Blast", "Steel Strike", "Acid Spray"],
+    speeds: ["Lightning", "Swift", "Quick", "Moderate", "Steady", "Rapid", "Fleet", "Brisk", "Hasty", "Speedy"],
+    durabilities: ["Unyielding", "Resilient", "Tough", "Solid", "Average", "Unshakable", "Hardened", "Sturdy", "Robust", "Steadfast"],
+    agilities: ["Agile", "Nimble", "Graceful", "Balanced", "Stable", "Dexterous", "Lithe", "Supple", "Evasive", "Flexible"],
+    villains: ["All For One", "Shigaraki", "Dabi", "Overhaul", "Stain"],
+    bgImage: "MHA.png"
+  },
+  {
+    name: "Hunter X Hunter",
+    races: ["Human", "Beast", "Chimera Ant", "Magical Beast", "Nen User", "Hunter", "Phantom Troupe Member", "Zoldyck", "Kurta", "Greed Island Player"],
+    transformations: ["Nen Aura", "Enhancement", "Transmutation", "Conjuration", "Manipulation", "Specialization", "Emperor Time", "None", "Bungee Gum", "Chain Jail"],
+    powers: ["Nen Strike", "Rock-Paper-Scissors", "Bungee Gum Attack", "Chain Assault", "Dragon Head", "Holy Chain", "Judgment Chain", "100-Type Guanyin Bodhisattva", "Razor's Spike", "God's Accomplice"],
+    speeds: ["Blazing", "Rapid", "Quick", "Steady", "Moderate", "Swift", "Hasty", "Brisk", "Fleet", "Speedy"],
+    durabilities: ["Tough", "Resilient", "Solid", "Unyielding", "Average", "Hardened", "Robust", "Sturdy", "Steadfast", "Unshakable"],
+    agilities: ["Nimble", "Agile", "Graceful", "Dexterous", "Balanced", "Flexible", "Lithe", "Supple", "Evasive", "Stable"],
+    villains: ["Hisoka", "Chrollo Lucilfer", "Meruem", "Pitou", "Feitan"],
+    bgImage: "HunterXHunter.png"
+  },
+  {
+    name: "Jujutsu Kaisen",
+    races: ["Human", "Cursed Spirit", "Sorcerer", "Curse User", "Shikigami User", "Non-Sorcerer", "Cursed Womb", "Grade 1 Sorcerer", "Special Grade", "Vessel"],
+    transformations: ["Domain Expansion", "Cursed Technique", "Reverse Cursed Technique", "Binding Vow", "None", "Black Flash", "Maximum Technique", "Cursed Energy Surge", "Barrier Technique", "Innate Domain"],
+    powers: ["Cursed Slash", "Divergent Fist", "Black Flash Strike", "Cursed Spirit Manipulation", "Ten Shadows Technique", "Limitless Blue", "Limitless Red", "Purple Hollow", "Boogie Woogie", "Blood Manipulation"],
+    speeds: ["Lightning", "Swift", "Rapid", "Quick", "Moderate", "Hasty", "Brisk", "Fleet", "Speedy", "Steady"],
+    durabilities: ["Resilient", "Tough", "Solid", "Unyielding", "Average", "Sturdy", "Robust", "Hardened", "Steadfast", "Unshakable"],
+    agilities: ["Agile", "Nimble", "Dexterous", "Graceful", "Balanced", "Flexible", "Lithe", "Supple", "Evasive", "Stable"],
+    villains: ["Sukuna", "Mahito", "Jogo", "Hanami", "Geto"],
+    bgImage: "JJK.png"
+  },
+  {
+    name: "Demon Slayer",
+    races: ["Human", "Demon", "Demon Slayer", "Hashira", "Upper Moon", "Lower Moon", "Breathing User", "Blood Demon Art User", "Nichirin Wielder", "Hybrid"],
+    transformations: ["Breathing Form", "Blood Demon Art", "Demon Mark", "Transparent World", "None", "Hinokami Kagura", "Total Concentration", "Demon Form", "Slayer Mark", "Enhanced Senses"],
+    powers: ["Water Wheel", "Thunderclap Flash", "Hinokami Dance", "Flame Tiger", "Love Whip", "Stone Skin", "Wind Blade", "Mist Slash", "Beast Fang", "Explosive Blood"],
+    speeds: ["Blazing", "Swift", "Rapid", "Quick", "Moderate", "Hasty", "Fleet", "Brisk", "Speedy", "Steady"],
+    durabilities: ["Unyielding", "Tough", "Resilient", "Solid", "Average", "Hardened", "Sturdy", "Robust", "Steadfast", "Unshakable"],
+    agilities: ["Agile", "Nimble", "Graceful", "Dexterous", "Balanced", "Lithe", "Flexible", "Supple", "Evasive", "Stable"],
+    villains: ["Muzan Kibutsuji", "Kokushibo", "Akaza", "Doma", "Gyokko"],
+    bgImage: "DMS.png"
+  }
+];
+    // Game state
+    let currentUniverse = null;
+    let character = {
+      name: "",
+      universe: "",
+      race: "",
+      transformation: "",
+      power: "",
+      attack: 0,
+      defense: 0,
+      specialAttack: 0,
+      powerLevel: 0,
+      speed: "",
+      speedValue: 0,
+      durability: "",
+      durabilityValue: 0,
+      agility: "",
+      agilityValue: 0
+    };
+    let villain = {
+      name: "",
+      attack: 0,
+      defense: 0,
+      specialAttack: 0,
+      powerLevel: 0,
+      speedValue: 0,
+      durabilityValue: 0,
+      agilityValue: 0
+    };
+    let step = 0;
+    const actionBtn = document.getElementById('actionBtn');
+    const charNameInput = document.getElementById('charNameInput');
+    const currentStep = document.getElementById('currentStep');
+    const gameDiv = document.getElementById('game');
+    // Stat calculation helpers
+    function getStatValue(statName, statArray) {
+      const index = statArray.indexOf(statName);
+      return 10 - index;
+    }
+    function randomSelect(array) {
+      return array[Math.floor(Math.random() * array.length)];
+    }
+    // Show character name input at start
+    actionBtn.onclick = function () {
+      if (step === 0) {
+        currentStep.textContent = "Enter Your Character's Name";
+        charNameInput.style.display = '';
+        actionBtn.textContent = "Continue";
+        step = 0.5;
+      } else if (step === 0.5) {
+        const name = charNameInput.value.trim();
+        if (!name) {
+          charNameInput.style.border = "2px solid red";
+          charNameInput.placeholder = "Please enter a name!";
+          return;
+        }
+        charNameInput.style.display = 'none';
+        actionBtn.style.display = 'none';
+        character.name = name;
+        step = 1;
+        showUniverseSelection();
+      }
+    };
+    // Show universe selection
+    function showUniverseSelection() {
+      gameDiv.innerHTML = `<h2 id="currentStep">Choose Your Anime Universe</h2>
+        <button id="backBtnUniverse" class="back-btn">Back</button>`;
+      universes.forEach(universe => {
+        let btn = document.createElement('button');
+        btn.textContent = universe.name;
+        btn.onclick = () => {
+          currentUniverse = universe;
+          character.universe = universe.name;
+          step = 2;
+          showRaceSelection();
+        };
+        gameDiv.appendChild(btn);
+      });
+      let randomBtn = document.createElement('button');
+      randomBtn.textContent = "Randomize Universe";
+      randomBtn.className = 'random-btn';
+      randomBtn.onclick = () => {
+        currentUniverse = randomSelect(universes);
+        character.universe = currentUniverse.name;
+        step = 2;
+        showRaceSelection();
+      };
+      gameDiv.appendChild(randomBtn);
+      document.getElementById('backBtnUniverse').onclick = () => {
+        resetGame();
+      };
+    }
+    function showRaceSelection() {
+      gameDiv.innerHTML = `<h2 id="currentStep">Choose Your Race</h2>
+        <button id="backBtnRace" class="back-btn">Back</button>`;
+      gameDiv.classList.add('game-with-bg');
+      gameDiv.style.backgroundImage = `url('pictures/${currentUniverse.bgImage}')`;
+      showOptions(currentUniverse.races, 'race', showTransformationSelection);
+      document.getElementById('backBtnRace').onclick = showUniverseSelection;
+    }
+    function showTransformationSelection() {
+      gameDiv.innerHTML = `<h2 id="currentStep">Choose Your Transformation</h2>
+        <button id="backBtnTrans" class="back-btn">Back</button>`;
+      showOptions(currentUniverse.transformations, 'transformation', showPowerSelection);
+      document.getElementById('backBtnTrans').onclick = showRaceSelection;
+    }
+    function showPowerSelection() {
+      gameDiv.innerHTML = `<h2 id="currentStep">Choose Your Power</h2>
+        <button id="backBtnPower" class="back-btn">Back</button>`;
+      showOptions(currentUniverse.powers, 'power', showStatSelection);
+      document.getElementById('backBtnPower').onclick = showTransformationSelection;
+    }
+    // Stat selection step
+    function showStatSelection() {
+      gameDiv.innerHTML = `<h2 id="currentStep">Distribute Your Stats</h2>
+        <button id="backBtnStat" class="back-btn">Back</button>
+        <p>Choose your Attack, Defense, and Special Attack (each between 1 and 10, total must be 20)</p>
+        <label>Attack: <input type="number" id="attackInput" min="1" max="10" value="7"></label><br>
+        <label>Defense: <input type="number" id="defenseInput" min="1" max="10" value="7"></label><br>
+        <label>Special Attack: <input type="number" id="specialInput" min="1" max="10" value="6"></label><br>
+        <button id="statContinueBtn">Continue</button>
+        <p id="statError" style="color:red;"></p>
+      `;
+      document.getElementById('statContinueBtn').onclick = () => {
+        const atk = parseInt(document.getElementById('attackInput').value, 10);
+        const def = parseInt(document.getElementById('defenseInput').value, 10);
+        const spc = parseInt(document.getElementById('specialInput').value, 10);
+        if (atk < 1 || atk > 10 || def < 1 || def > 10 || spc < 1 || spc > 10 || (atk + def + spc !== 20)) {
+          document.getElementById('statError').textContent = "Each stat must be 1-10 and total must be 20.";
+          return;
+        }
+        character.attack = atk;
+        character.defense = def;
+        character.specialAttack = spc;
+        step = 6;
+        showSpeedSelection();
+      };
+      document.getElementById('backBtnStat').onclick = showPowerSelection;
+    }
+    function showSpeedSelection() {
+      gameDiv.innerHTML = `<h2 id="currentStep">Choose Your Speed</h2>
+        <button id="backBtnSpeed" class="back-btn">Back</button>`;
+      showOptions(currentUniverse.speeds, 'speed', showDurabilitySelection);
+      document.getElementById('backBtnSpeed').onclick = showStatSelection;
+    }
+    function showDurabilitySelection() {
+      gameDiv.innerHTML = `<h2 id="currentStep">Choose Your Durability</h2>
+        <button id="backBtnDurability" class="back-btn">Back</button>`;
+      showOptions(currentUniverse.durabilities, 'durability', showAgilitySelection);
+      document.getElementById('backBtnDurability').onclick = showSpeedSelection;
+    }
+    function showAgilitySelection() {
+      gameDiv.innerHTML = `<h2 id="currentStep">Choose Your Agility</h2>
+        <button id="backBtnAgility" class="back-btn">Back</button>`;
+      showOptions(currentUniverse.agilities, 'agility', finalizeCharacter);
+      document.getElementById('backBtnAgility').onclick = showDurabilitySelection;
+    }
+    // Show options for the current step with randomization
+    function showOptions(options, key, nextCallback) {
+      options.forEach(option => {
+        let btn = document.createElement('button');
+        btn.textContent = option;
+        btn.onclick = () => {
+          character[key] = option;
+          if (nextCallback) nextCallback();
+        };
+        gameDiv.appendChild(btn);
+      });
+      let randomBtn = document.createElement('button');
+      randomBtn.textContent = "Randomize";
+      randomBtn.className = 'random-btn';
+      randomBtn.onclick = () => {
+        character[key] = randomSelect(options);
+        if (nextCallback) nextCallback();
+      };
+      gameDiv.appendChild(randomBtn);
+    }
+    // Display final character stats and present challenge
+    function finalizeCharacter() {
+      character.speedValue = getStatValue(character.speed, currentUniverse.speeds);
+      character.durabilityValue = getStatValue(character.durability, currentUniverse.durabilities);
+      character.agilityValue = getStatValue(character.agility, currentUniverse.agilities);
+      character.powerLevel = character.attack * 100 + character.defense * 80 + character.specialAttack * 120 + character.speedValue * 50 + character.durabilityValue * 50 + character.agilityValue * 50;
+      document.getElementById('results').style.display = 'block';
+      document.getElementById('backBtnResults').style.display = '';
+      document.getElementById('charName').innerHTML = `<span class="stat">Name:</span> ${character.name}`;
+      document.getElementById('universe').innerHTML = `<span class="stat">Universe:</span> ${character.universe} <img src="pictures/${character.universe.replace(/\s/g, '_')}.png" alt="${character.universe}" width="50" height="50" onerror="this.style.display='none';">`;
+      document.getElementById('race').innerHTML = `<span class="stat">Race:</span> ${character.race}`;
+      document.getElementById('transformation').innerHTML = `<span class="stat">Transformation:</span> ${character.transformation}`;
+      document.getElementById('power').innerHTML = `<span class="stat">Power:</span> ${character.power}`;
+      document.getElementById('attack').innerHTML = `<span class="stat">Attack:</span> ${character.attack}`;
+      document.getElementById('defense').innerHTML = `<span class="stat">Defense:</span> ${character.defense}`;
+      document.getElementById('specialAttack').innerHTML = `<span class="stat">Special Attack:</span> ${character.specialAttack}`;
+      document.getElementById('powerLevel').innerHTML = `<span class="stat">Power Level:</span> ${character.powerLevel}`;
+      document.getElementById('speed').innerHTML = `<span class="stat">Speed:</span> ${character.speed}`;
+      document.getElementById('durability').innerHTML = `<span class="stat">Durability:</span> ${character.durability}`;
+      document.getElementById('agility').innerHTML = `<span class="stat">Agility:</span> ${character.agility}`;
+      gameDiv.style.display = 'none';
+      const resultsDiv = document.getElementById('results');
+      resultsDiv.classList.add('results-with-bg');
+      resultsDiv.style.backgroundImage = `url('pictures/${currentUniverse.bgImage}')`;
+      presentChallenge();
+    }
+    document.getElementById('backBtnResults').onclick = function() {
+      document.getElementById('results').style.display = 'none';
+      showAgilitySelection();
+    };
+    // Generate and evaluate a story challenge with a villain
+    function presentChallenge() {
+      document.getElementById('challenge').style.display = 'block';
+      document.getElementById('backBtnChallenge').style.display = '';
+      document.getElementById('challengeAnotherBtn').style.display = 'none';
+      const challenges = [
+        `You face off against {villain} in the ${character.universe} universe. Can you defeat them in combat?`,
+        `A catastrophic event orchestrated by {villain} threatens the world of ${character.universe}. Do you have what it takes to stop them?`,
+        `An ancient relic in the ${character.universe} universe is guarded by {villain}. Can you overcome them to claim it?`,
+        `The legendary {villain} awakens in the ${character.universe} realm. Can you stop their rampage?`,
+        `A rival force led by {villain} from the ${character.universe} world seeks to destroy you. Will you emerge victorious?`
+      ];
+      villain.name = randomSelect(currentUniverse.villains);
+      villain.attack = Math.floor(Math.random() * 10) + 1;
+      villain.defense = Math.floor(Math.random() * 10) + 1;
+      villain.specialAttack = Math.floor(Math.random() * 10) + 1;
+      villain.speedValue = Math.floor(Math.random() * 10) + 1;
+      villain.durabilityValue = Math.floor(Math.random() * 10) + 1;
+      villain.agilityValue = Math.floor(Math.random() * 10) + 1;
+      villain.powerLevel = villain.attack * 100 + villain.defense * 80 + villain.specialAttack * 120 + villain.speedValue * 50 + villain.durabilityValue * 50 + villain.agilityValue * 50;
+      const challengeText = challenges[Math.floor(Math.random() * challenges.length)].replace("{villain}", villain.name);
+      document.getElementById('challengeText').textContent = challengeText;
+      document.getElementById('villainStats').innerHTML = `
+        <span class="stat">Villain:</span> ${villain.name} <img src="pictures/${villain.name.replace(/\s/g, '_')}.png" alt="${villain.name}" width="50" height="50" onerror="this.style.display='none';"><br>
+        <span class="stat">Attack:</span> ${villain.attack}<br>
+        <span class="stat">Defense:</span> ${villain.defense}<br>
+        <span class="stat">Special Attack:</span> ${villain.specialAttack}<br>
+        <span class="stat">Power Level:</span> ${villain.powerLevel}<br>
+        <span class="stat">Speed Value:</span> ${villain.speedValue}<br>
+        <span class="stat">Durability Value:</span> ${villain.durabilityValue}<br>
+        <span class="stat">Agility Value:</span> ${villain.agilityValue}
+      `;
+      runCombat();
+    }
+    document.getElementById('backBtnChallenge').onclick = function() {
+      document.getElementById('challenge').style.display = 'none';
+      document.getElementById('results').style.display = 'block';
+    };
+    // Interactive combat log
+    function runCombat() {
+      const logDiv = document.getElementById('combatLog');
+      logDiv.innerHTML = "";
+      let charHP = character.defense * 10 + character.durabilityValue * 10;
+      let villainHP = villain.defense * 10 + villain.durabilityValue * 10;
+      let turn = 1;
+      let charSpeed = character.speedValue + character.agilityValue;
+      let villainSpeed = villain.speedValue + villain.agilityValue;
+      let charFirst = charSpeed >= villainSpeed;
+      let combatRounds = [];
+      let winner = null;
+      while (charHP > 0 && villainHP > 0 && turn <= 10) {
+        let attacker, defender, atkStat, defStat, spcStat, atkName, defName;
+        if ((turn % 2 === 1 && charFirst) || (turn % 2 === 0 && !charFirst)) {
+          attacker = character;
+          defender = villain;
+          atkStat = character.attack;
+          defStat = villain.defense;
+          spcStat = character.specialAttack;
+          atkName = character.name;
+          defName = villain.name;
+        } else {
+          attacker = villain;
+          defender = character;
+          atkStat = villain.attack;
+          defStat = character.defense;
+          spcStat = villain.specialAttack;
+          atkName = villain.name;
+          defName = character.name;
+        }
+        let useSpecial = Math.random() < 0.3;
+        let damage = useSpecial ? spcStat * 2 + Math.floor(Math.random() * 10) : atkStat + Math.floor(Math.random() * 10);
+        damage -= defStat;
+        if (damage < 1) damage = 1;
+        if (defender === villain) {
+          villainHP -= damage;
+          if (villainHP <= 0) winner = "character";
+        } else {
+          charHP -= damage;
+          if (charHP <= 0) winner = "villain";
+        }
+        combatRounds.push(
+          `Turn ${turn}: ${atkName} ${useSpecial ? "uses Special Attack!" : "attacks"} and deals ${damage} damage to ${defName}. (${defName} HP: ${defender === villain ? Math.max(0,villainHP) : Math.max(0,charHP)})`
+        );
+        turn++;
+      }
+      combatRounds.forEach(line => {
+        logDiv.innerHTML += line + "<br>";
+      });
+      let result, fightConclusion;
+      if (winner === "character") {
+        result = "Success! Your strength and abilities have overcome the villain!";
+        fightConclusion = `You defeated ${villain.name} after a fierce battle!`;
+        document.getElementById('challengeAnotherBtn').style.display = '';
+        document.getElementById('challengeAnotherBtn').onclick = () => {
+          presentChallenge();
+        };
+      } else if (winner === "villain") {
+        result = "Failure... The villain was too powerful, but you can try again with a new character.";
+        fightConclusion = `${villain.name} has defeated you. Train harder and try again!`;
+        document.getElementById('challengeAnotherBtn').style.display = 'none';
+      } else {
+        // If both are alive after 10 rounds, compare HP for winner
+        if (charHP > villainHP) {
+          result = "Success! Your strength and abilities have overcome the villain!";
+          fightConclusion = `You defeated ${villain.name} after a fierce battle!`;
+          document.getElementById('challengeAnotherBtn').style.display = '';
+          document.getElementById('challengeAnotherBtn').onclick = () => {
+            presentChallenge();
+          };
+        } else if (villainHP > charHP) {
+          result = "Failure... The villain was too powerful, but you can try again with a new character.";
+          fightConclusion = `${villain.name} has defeated you. Train harder and try again!`;
+          document.getElementById('challengeAnotherBtn').style.display = 'none';
+        } else {
+          result = "Draw! Both fighters are exhausted.";
+          fightConclusion = "Neither side could claim victory. It's a stalemate!";
+          document.getElementById('challengeAnotherBtn').style.display = 'none';
+        }
+      }
+      document.getElementById('challengeResult').innerHTML = `<span class="stat">Result:</span> ${result}`;
+      document.getElementById('fightConclusion').textContent = fightConclusion;
+      const challengeDiv = document.getElementById('challenge');
+      challengeDiv.classList.add('challenge-with-bg');
+      if (result.startsWith("Success")) {
+        challengeDiv.style.backgroundImage = "url('pictures/SuccessBackground.png')";
+      } else if (result.startsWith("Failure")) {
+        challengeDiv.style.backgroundImage = "url('pictures/FailureBackground.png')";
+      } else {
+        challengeDiv.style.backgroundImage = "url('pictures/DrawBackground.png')";
+      }
+      document.getElementById('playAgainBtn').onclick = resetGame;
+    }
+    // Function to reset the game
+    function resetGame() {
+      step = 0;
+      character = {
+        name: "",
+        universe: "", race: "", transformation: "", power: "",
+        attack: 0, defense: 0, specialAttack: 0, powerLevel: 0,
+        speed: "", speedValue: 0, durability: "", durabilityValue: 0, agility: "", agilityValue: 0
+      };
+      villain = {
+        name: "", attack: 0, defense: 0, specialAttack: 0, powerLevel: 0,
+        speedValue: 0, durabilityValue: 0, agilityValue: 0
+      };
+      document.getElementById('results').style.display = 'none';
+      document.getElementById('challenge').style.display = 'none';
+      document.getElementById('challenge').classList.remove('challenge-with-bg');
+      document.getElementById('challenge').style.backgroundImage = "";
+      document.getElementById('results').classList.remove('results-with-bg');
+      document.getElementById('results').style.backgroundImage = "";
+      document.getElementById('game').classList.remove('game-with-bg');
+      document.getElementById('game').style.backgroundImage = "";
+      gameDiv.style.display = 'block';
+      gameDiv.innerHTML = `<h2 id="currentStep">Click Start to Begin Your Journey!</h2>
+        <input type="text" id="charNameInput" placeholder="Enter your character's name" style="margin-bottom:10px;display:none;">
+        <button id="actionBtn">Start</button>`;
+      // Re-bind start button and name input
+      const actionBtnNew = document.getElementById('actionBtn');
+      const charNameInputNew = document.getElementById('charNameInput');
+      actionBtnNew.onclick = function () {
+        if (step === 0) {
+          document.getElementById('currentStep').textContent = "Enter Your Character's Name";
+          charNameInputNew.style.display = '';
+          actionBtnNew.textContent = "Continue";
+          step = 0.5;
+        } else if (step === 0.5) {
+          const name = charNameInputNew.value.trim();
+          if (!name) {
+            charNameInputNew.style.border = "2px solid red";
+            charNameInputNew.placeholder = "Please enter a name!";
+            return;
+          }
+          charNameInputNew.style.display = 'none';
+          actionBtnNew.style.display = 'none';
+          character.name = name;
+          step = 1;
+          showUniverseSelection();
+        }
+      };
+      document.getElementById('backBtnResults').style.display = 'none';
+      document.getElementById('backBtnChallenge').style.display = 'none';
+      document.getElementById('challengeAnotherBtn').style.display = 'none';
+    }
+  </script>
+</body>
+</html>
