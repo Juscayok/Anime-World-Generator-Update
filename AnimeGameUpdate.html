@@ -10,48 +10,67 @@
       text-align: center;
       margin: 0;
       padding: 10px;
-      background-color: #f0f0f0;
-      background-image: url('pictures/Anime.png');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      background-attachment: fixed;
-      color: #000;
-      text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
-      box-sizing: border-box;
+  background-color: #181818;
+  background-image: url('pictures/Anime.png');
+  background-size: contain;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  min-height: 100vh;
+  min-width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+    color: #fff;
+    text-shadow: 2px 2px 6px #000, 0 0 2px #000;
+    box-sizing: border-box;
     }
     .card {
-      margin: 20px auto;
-      padding: 15px;
-      border: 2px solid #333;
-      border-radius: 10px;
-      width: 90%;
-      max-width: 400px;
-      background-color: rgba(255, 255, 255, 0.9);
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 20px auto;
+  padding: 15px;
+  border: 2px solid #333;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 400px;
+  background-color: rgba(24, 24, 24, 0.96);
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
     }
     button {
       padding: 8px 16px;
       margin: 5px;
       font-size: 14px;
       cursor: pointer;
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      min-width: 120px;
+      background-color: rgba(24,24,24,0.85);
+      color: #fff;
+      text-shadow: 2px 2px 6px #000, 0 0 2px #000;
+      background-repeat: no-repeat;
     }
-    button:hover {
-      background-color: #45a049;
-    }
+
     .random-btn {
-      background-color: #ff9800;
+      background: linear-gradient(90deg, #ffb347 0%, #ffcc33 100%);
+      color: #222;
+      border: 2px solid #ff9800;
+      font-weight: bold;
+      box-shadow: 0 2px 8px rgba(255, 200, 50, 0.2);
+      text-shadow: none;
+      transition: background 0.2s, color 0.2s, border 0.2s;
     }
     .random-btn:hover {
-      background-color: #e68900;
+      background: linear-gradient(90deg, #ffe066 0%, #ffd700 100%);
+      color: #b00;
+      border: 2px solid #b8860b;
     }
-    .stat {
-      font-weight: bold;
+    }
+  .game-with-bg {
+    color: #fff;
+    text-shadow: 2px 2px 6px #000, 0 0 2px #000;
+    background-color: rgba(24,24,24,0.85);
+    background-repeat: no-repeat;
       margin: 8px 0;
     }
     .results, .challenge {
@@ -61,11 +80,15 @@
       border-radius: 10px;
       width: 90%;
       max-width: 400px;
-      background-color: rgba(255, 255, 255, 0.9);
+    background-color: rgba(24, 24, 24, 0.96);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
     }
     img {
       vertical-align: middle;
-      margin-left: 5px;
+    background-color: rgba(24, 24, 24, 0.96);
+    color: #fff;
       max-width: 40px;
       max-height: 40px;
       object-fit: contain;
@@ -78,28 +101,27 @@
       text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
     }
     .results-with-bg {
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      color: #fff;
-      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
-      background-color: rgba(255, 255, 255, 0.2);
-    }
-    .game-with-bg {
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      color: #fff;
-      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
-      background-color: rgba(255, 255, 255, 0.2);
-    }
+  color: #fff;
+  text-shadow: 2px 2px 6px #000, 0 0 2px #000;
+  background-color: rgba(24,24,24,0.85);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+.game-with-bg {
+  color: #fff;
+  text-shadow: 2px 2px 6px #000, 0 0 2px #000;
+  background-color: rgba(24,24,24,0.85);
+  background-repeat: no-repeat;
+}
     .combat-log {
-      background: rgba(0,0,0,0.05);
-      border-radius: 8px;
+  background: rgba(0,0,0,0.55);
       padding: 10px;
       margin: 10px 0;
       text-align: left;
       max-height: 200px;
+  color: #ffe066;
+  text-shadow: 1px 1px 3px #000;
       overflow-y: auto;
       font-size: 0.95em;
     }
@@ -119,14 +141,17 @@
       }
       button {
         display: block;
-        margin: 5px auto;
-        width: 80%;
-        font-size: 12px;
-      }
-      .card, .results, .challenge {
-        width: 95%;
-        padding: 10px;
-      }
+    margin: 20px auto;
+    padding: 15px;
+    border: 2px solid #333;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 400px;
+    background-color: rgba(24, 24, 24, 0.96);
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
       img {
         max-width: 30px;
         max-height: 30px;
@@ -136,6 +161,23 @@
 </head>
 <body>
   <h1>Anime World Generator</h1>
+  <div class="card" id="tutorial" style="max-width:600px; margin-bottom:20px;">
+    <h2>How to Play</h2>
+    <ol style="text-align:left;">
+      <li><b>Start:</b> Click <b>Start</b> and enter your character's name.</li>
+      <li><b>Choose Universe:</b> Pick your favorite anime universe or randomize it.</li>
+      <li><b>Choose Race, Transformation, and Power:</b> Select or randomize your character's traits.<br>
+        <i>(Tip: Power is just your signature move for flavor!)</i>
+      </li>
+      <li><b>Distribute Stats:</b> Assign points to Attack, Defense, and Special Attack (total must be 20).</li>
+      <li><b>Choose Speed, Durability, Agility:</b> Pick or randomize these for more character flavor.</li>
+      <li><b>Review:</b> See your full character sheet and stats.</li>
+      <li><b>Challenge:</b> Face a random villain in your universe. Watch the combat log to see who wins!</li>
+      <li><b>Victory:</b> If you win, you can challenge another boss with the same character. If you lose, try again!</li>
+      <li><b>Back Buttons:</b> Use <b>Back</b> at any step to change your choices before fighting.</li>
+    </ol>
+    <p style="font-size:0.95em;color:#555;">Have fun creating and battling with your own anime hero!</p>
+  </div>
   <div class="card" id="game">
     <h2 id="currentStep">Click Start to Begin Your Journey!</h2>
     <input type="text" id="charNameInput" placeholder="Enter your character's name" style="margin-bottom:10px;display:none;">
@@ -156,6 +198,8 @@
     <p id="speed"></p>
     <p id="durability"></p>
     <p id="agility"></p>
+    <p id="luck"></p>
+    <p id="intelligence"></p>
   </div>
   <div class="challenge" id="challenge" style="display: none;">
     <h2>Story Challenge</h2>
@@ -280,7 +324,9 @@ const universes = [
       durability: "",
       durabilityValue: 0,
       agility: "",
-      agilityValue: 0
+      agilityValue: 0,
+      luck: 5,
+      intelligence: 5
     };
     let villain = {
       name: "",
@@ -292,7 +338,12 @@ const universes = [
       durabilityValue: 0,
       agilityValue: 0
     };
-    let step = 0;
+  let step = 0;
+  // Track step history for back navigation
+  let stepHistory = [];
+  // Track previous choices for each step
+let choiceHistory = [];
+  let defeatedVillains = [];
     const actionBtn = document.getElementById('actionBtn');
     const charNameInput = document.getElementById('charNameInput');
     const currentStep = document.getElementById('currentStep');
@@ -306,28 +357,75 @@ const universes = [
       return array[Math.floor(Math.random() * array.length)];
     }
     // Show character name input at start
-    actionBtn.onclick = function () {
-      if (step === 0) {
-        currentStep.textContent = "Enter Your Character's Name";
-        charNameInput.style.display = '';
-        actionBtn.textContent = "Continue";
-        step = 0.5;
-      } else if (step === 0.5) {
-        const name = charNameInput.value.trim();
-        if (!name) {
-          charNameInput.style.border = "2px solid red";
-          charNameInput.placeholder = "Please enter a name!";
-          return;
-        }
-        charNameInput.style.display = 'none';
-        actionBtn.style.display = 'none';
-        character.name = name;
-        step = 1;
-        showUniverseSelection();
+    function showStartScreen() {
+  gameDiv.style.display = 'block';
+  gameDiv.innerHTML = `<h2 id="currentStep">Click Start to Begin Your Journey!</h2>
+    <input type="text" id="charNameInput" placeholder="Enter your character's name" style="margin-bottom:10px;display:none;" value="${savedCharName}">
+    <button id="actionBtn">Start</button>
+    <button id="reuseCharNameBtn" style="display:${savedCharName ? '' : 'none'};margin-left:10px;">Reuse Last Name</button>`;
+  const actionBtnNew = document.getElementById('actionBtn');
+  const charNameInputNew = document.getElementById('charNameInput');
+  const reuseBtn = document.getElementById('reuseCharNameBtn');
+  actionBtnNew.onclick = function () {
+    if (step === 0) {
+      document.getElementById('currentStep').textContent = "Enter Your Character's Name";
+      charNameInputNew.style.display = '';
+      actionBtnNew.textContent = "Continue";
+      step = 0.5;
+    } else if (step === 0.5) {
+      const name = charNameInputNew.value.trim();
+      if (!name) {
+        charNameInputNew.style.border = "2px solid red";
+        charNameInputNew.placeholder = "Please enter a name!";
+        return;
       }
+      charNameInputNew.style.display = 'none';
+      actionBtnNew.style.display = 'none';
+      if (reuseBtn) reuseBtn.style.display = 'none';
+      character.name = name;
+      savedCharName = name;
+      step = 1;
+      showUniverseSelection();
+    }
+  };
+  if (reuseBtn) {
+    reuseBtn.onclick = function() {
+      charNameInputNew.value = savedCharName;
+      charNameInputNew.style.display = '';
+      actionBtnNew.textContent = "Continue";
+      step = 0.5;
     };
+  }
+}
+// Show character name input at start
+actionBtn.onclick = function () {
+  if (step === 0) {
+    currentStep.textContent = "Enter Your Character's Name";
+    charNameInput.style.display = '';
+    actionBtn.textContent = "Continue";
+    step = 0.5;
+    // Hide tutorial on first click
+    var tutorialDiv = document.getElementById('tutorial');
+    if (tutorialDiv) tutorialDiv.style.display = 'none';
+  } else if (step === 0.5) {
+    const name = charNameInput.value.trim();
+    if (!name) {
+      charNameInput.style.border = "2px solid red";
+      charNameInput.placeholder = "Please enter a name!";
+      return;
+    }
+    charNameInput.style.display = 'none';
+    actionBtn.style.display = 'none';
+    character.name = name;
+    savedCharName = name;
+    step = 1;
+    showUniverseSelection();
+  }
+};
     // Show universe selection
     function showUniverseSelection() {
+      stepHistory.push('showUniverseSelection');
+      choiceHistory.push({});
       gameDiv.innerHTML = `<h2 id="currentStep">Choose Your Anime Universe</h2>
         <button id="backBtnUniverse" class="back-btn">Back</button>`;
       universes.forEach(universe => {
@@ -337,6 +435,7 @@ const universes = [
           currentUniverse = universe;
           character.universe = universe.name;
           step = 2;
+          defeatedVillains = [];
           showRaceSelection();
         };
         gameDiv.appendChild(btn);
@@ -348,6 +447,7 @@ const universes = [
         currentUniverse = randomSelect(universes);
         character.universe = currentUniverse.name;
         step = 2;
+        defeatedVillains = [];
         showRaceSelection();
       };
       gameDiv.appendChild(randomBtn);
@@ -356,33 +456,110 @@ const universes = [
       };
     }
     function showRaceSelection() {
+      stepHistory.push('showRaceSelection');
+      choiceHistory.push({ race: character.race });
+      let previewVillain = currentUniverse._previewVillain || randomSelect(currentUniverse.villains);
+      currentUniverse._previewVillain = previewVillain;
       gameDiv.innerHTML = `<h2 id="currentStep">Choose Your Race</h2>
-        <button id="backBtnRace" class="back-btn">Back</button>`;
+        <button id="backBtnRace" class="back-btn">Back</button>
+        <div style='margin-bottom:10px;font-size:1.1em;'><b>First Villain You Will Face:</b> <span id='villainPreviewName' style='color:#b00;'>${previewVillain}</span> <img id='villainPreviewImg' width='50' height='50' style='vertical-align:middle;'></div>`;
       gameDiv.classList.add('game-with-bg');
       gameDiv.style.backgroundImage = `url('pictures/${currentUniverse.bgImage}')`;
-      showOptions(currentUniverse.races, 'race', showTransformationSelection);
-      document.getElementById('backBtnRace').onclick = showUniverseSelection;
+      let img = document.getElementById('villainPreviewImg');
+      img.src = `pictures/${previewVillain.replace(/\s/g, '_')}.png`;
+      img.alt = previewVillain;
+      img.onerror = function() { this.style.display = 'none'; };
+      // Clear previous options
+      while (gameDiv.children.length > 3) gameDiv.removeChild(gameDiv.lastChild);
+      currentUniverse.races.forEach(option => {
+        let btn = document.createElement('button');
+        btn.textContent = option;
+        btn.onclick = () => {
+          character.race = option;
+          showTransformationSelection();
+        };
+        if (character.race === option) btn.style.border = '2px solid #ffe066';
+        gameDiv.appendChild(btn);
+      });
+      let randomBtn = document.createElement('button');
+      randomBtn.textContent = "Randomize";
+      randomBtn.className = 'random-btn';
+      randomBtn.onclick = () => {
+        character.race = randomSelect(currentUniverse.races);
+        showTransformationSelection();
+      };
+      gameDiv.appendChild(randomBtn);
+      document.getElementById('backBtnRace').onclick = goBackStep;
     }
-    function showTransformationSelection() {
-      gameDiv.innerHTML = `<h2 id="currentStep">Choose Your Transformation</h2>
-        <button id="backBtnTrans" class="back-btn">Back</button>`;
-      showOptions(currentUniverse.transformations, 'transformation', showPowerSelection);
-      document.getElementById('backBtnTrans').onclick = showRaceSelection;
-    }
+
+function showTransformationSelection() {
+  stepHistory.push('showTransformationSelection');
+  choiceHistory.push({ transformation: character.transformation });
+  gameDiv.innerHTML = `<h2 id="currentStep">Choose Your Transformation</h2>
+    <button id="backBtnTrans" class="back-btn">Back</button>`;
+  // Clear previous options
+  while (gameDiv.children.length > 2) gameDiv.removeChild(gameDiv.lastChild);
+  currentUniverse.transformations.forEach(option => {
+    let btn = document.createElement('button');
+    btn.textContent = option;
+    btn.onclick = () => {
+      character.transformation = option;
+      showPowerSelection();
+    };
+    if (character.transformation === option) btn.style.border = '2px solid #ffe066';
+    gameDiv.appendChild(btn);
+  });
+  let randomBtn = document.createElement('button');
+  randomBtn.textContent = "Randomize";
+  randomBtn.className = 'random-btn';
+  randomBtn.onclick = () => {
+    character.transformation = randomSelect(currentUniverse.transformations);
+    showPowerSelection();
+  };
+  gameDiv.appendChild(randomBtn);
+  document.getElementById('backBtnTrans').onclick = goBackStep;
+}
     function showPowerSelection() {
+      stepHistory.push('showPowerSelection');
+      choiceHistory.push({ power: character.power });
       gameDiv.innerHTML = `<h2 id="currentStep">Choose Your Power</h2>
-        <button id="backBtnPower" class="back-btn">Back</button>`;
-      showOptions(currentUniverse.powers, 'power', showStatSelection);
-      document.getElementById('backBtnPower').onclick = showTransformationSelection;
+        <button id="backBtnPower" class="back-btn">Back</button>
+        <p style="font-size:0.95em;color:#555;">Pick your character's signature move or ability. This is just for flavor!</p>`;
+      // Clear previous options
+      while (gameDiv.children.length > 3) gameDiv.removeChild(gameDiv.lastChild);
+      currentUniverse.powers.forEach(option => {
+        let btn = document.createElement('button');
+        btn.textContent = option;
+        btn.onclick = () => {
+          character.power = option;
+          showStatSelection();
+        };
+        if (character.power === option) btn.style.border = '2px solid #ffe066';
+        gameDiv.appendChild(btn);
+      });
+      let randomBtn = document.createElement('button');
+      randomBtn.textContent = "Randomize";
+      randomBtn.className = 'random-btn';
+      randomBtn.onclick = () => {
+        character.power = randomSelect(currentUniverse.powers);
+        showStatSelection();
+      };
+      gameDiv.appendChild(randomBtn);
+      document.getElementById('backBtnPower').onclick = goBackStep;
     }
-    // Stat selection step
     function showStatSelection() {
+      stepHistory.push('showStatSelection');
+      choiceHistory.push({
+        attack: character.attack,
+        defense: character.defense,
+        specialAttack: character.specialAttack
+      });
       gameDiv.innerHTML = `<h2 id="currentStep">Distribute Your Stats</h2>
         <button id="backBtnStat" class="back-btn">Back</button>
         <p>Choose your Attack, Defense, and Special Attack (each between 1 and 10, total must be 20)</p>
-        <label>Attack: <input type="number" id="attackInput" min="1" max="10" value="7"></label><br>
-        <label>Defense: <input type="number" id="defenseInput" min="1" max="10" value="7"></label><br>
-        <label>Special Attack: <input type="number" id="specialInput" min="1" max="10" value="6"></label><br>
+        <label>Attack: <input type="number" id="attackInput" min="1" max="10" value="${character.attack || 7}"></label><br>
+        <label>Defense: <input type="number" id="defenseInput" min="1" max="10" value="${character.defense || 7}"></label><br>
+        <label>Special Attack: <input type="number" id="specialInput" min="1" max="10" value="${character.specialAttack || 6}"></label><br>
         <button id="statContinueBtn">Continue</button>
         <p id="statError" style="color:red;"></p>
       `;
@@ -400,25 +577,88 @@ const universes = [
         step = 6;
         showSpeedSelection();
       };
-      document.getElementById('backBtnStat').onclick = showPowerSelection;
+      document.getElementById('backBtnStat').onclick = goBackStep;
     }
     function showSpeedSelection() {
+      stepHistory.push('showSpeedSelection');
+      choiceHistory.push({ speed: character.speed });
       gameDiv.innerHTML = `<h2 id="currentStep">Choose Your Speed</h2>
         <button id="backBtnSpeed" class="back-btn">Back</button>`;
-      showOptions(currentUniverse.speeds, 'speed', showDurabilitySelection);
-      document.getElementById('backBtnSpeed').onclick = showStatSelection;
+      // Clear previous options
+      while (gameDiv.children.length > 2) gameDiv.removeChild(gameDiv.lastChild);
+      currentUniverse.speeds.forEach(option => {
+        let btn = document.createElement('button');
+        btn.textContent = option;
+        btn.onclick = () => {
+          character.speed = option;
+          showDurabilitySelection();
+        };
+        if (character.speed === option) btn.style.border = '2px solid #ffe066';
+        gameDiv.appendChild(btn);
+      });
+      let randomBtn = document.createElement('button');
+      randomBtn.textContent = "Randomize";
+      randomBtn.className = 'random-btn';
+      randomBtn.onclick = () => {
+        character.speed = randomSelect(currentUniverse.speeds);
+        showDurabilitySelection();
+      };
+      gameDiv.appendChild(randomBtn);
+      document.getElementById('backBtnSpeed').onclick = goBackStep;
     }
     function showDurabilitySelection() {
+      stepHistory.push('showDurabilitySelection');
+      choiceHistory.push({ durability: character.durability });
       gameDiv.innerHTML = `<h2 id="currentStep">Choose Your Durability</h2>
         <button id="backBtnDurability" class="back-btn">Back</button>`;
-      showOptions(currentUniverse.durabilities, 'durability', showAgilitySelection);
-      document.getElementById('backBtnDurability').onclick = showSpeedSelection;
+      // Clear previous options
+      while (gameDiv.children.length > 2) gameDiv.removeChild(gameDiv.lastChild);
+      currentUniverse.durabilities.forEach(option => {
+        let btn = document.createElement('button');
+        btn.textContent = option;
+        btn.onclick = () => {
+          character.durability = option;
+          showAgilitySelection();
+        };
+        if (character.durability === option) btn.style.border = '2px solid #ffe066';
+        gameDiv.appendChild(btn);
+      });
+      let randomBtn = document.createElement('button');
+      randomBtn.textContent = "Randomize";
+      randomBtn.className = 'random-btn';
+      randomBtn.onclick = () => {
+        character.durability = randomSelect(currentUniverse.durabilities);
+        showAgilitySelection();
+      };
+      gameDiv.appendChild(randomBtn);
+      document.getElementById('backBtnDurability').onclick = goBackStep;
     }
     function showAgilitySelection() {
+      stepHistory.push('showAgilitySelection');
+      choiceHistory.push({ agility: character.agility });
       gameDiv.innerHTML = `<h2 id="currentStep">Choose Your Agility</h2>
         <button id="backBtnAgility" class="back-btn">Back</button>`;
-      showOptions(currentUniverse.agilities, 'agility', finalizeCharacter);
-      document.getElementById('backBtnAgility').onclick = showDurabilitySelection;
+      // Clear previous options
+      while (gameDiv.children.length > 2) gameDiv.removeChild(gameDiv.lastChild);
+      currentUniverse.agilities.forEach(option => {
+        let btn = document.createElement('button');
+        btn.textContent = option;
+        btn.onclick = () => {
+          character.agility = option;
+          finalizeCharacter();
+        };
+        if (character.agility === option) btn.style.border = '2px solid #ffe066';
+        gameDiv.appendChild(btn);
+      });
+      let randomBtn = document.createElement('button');
+      randomBtn.textContent = "Randomize";
+      randomBtn.className = 'random-btn';
+      randomBtn.onclick = () => {
+        character.agility = randomSelect(currentUniverse.agilities);
+        finalizeCharacter();
+      };
+      gameDiv.appendChild(randomBtn);
+      document.getElementById('backBtnAgility').onclick = goBackStep;
     }
     // Show options for the current step with randomization
     function showOptions(options, key, nextCallback) {
@@ -449,17 +689,20 @@ const universes = [
       document.getElementById('results').style.display = 'block';
       document.getElementById('backBtnResults').style.display = '';
       document.getElementById('charName').innerHTML = `<span class="stat">Name:</span> ${character.name}`;
-      document.getElementById('universe').innerHTML = `<span class="stat">Universe:</span> ${character.universe} <img src="pictures/${character.universe.replace(/\s/g, '_')}.png" alt="${character.universe}" width="50" height="50" onerror="this.style.display='none';">`;
+  document.getElementById('universe').innerHTML = `<span class="stat">Universe:</span> ${character.universe} <img src="pictures/${character.universe.replace(/\s/g, '_')}.png" alt="${character.universe}" style="width:100px;max-width:90%;height:60px;object-fit:contain;display:inline-block;vertical-align:middle;margin-left:8px;" onerror="this.style.display='none';">`;
       document.getElementById('race').innerHTML = `<span class="stat">Race:</span> ${character.race}`;
-      document.getElementById('transformation').innerHTML = `<span class="stat">Transformation:</span> ${character.transformation}`;
-      document.getElementById('power').innerHTML = `<span class="stat">Power:</span> ${character.power}`;
-      document.getElementById('attack').innerHTML = `<span class="stat">Attack:</span> ${character.attack}`;
-      document.getElementById('defense').innerHTML = `<span class="stat">Defense:</span> ${character.defense}`;
-      document.getElementById('specialAttack').innerHTML = `<span class="stat">Special Attack:</span> ${character.specialAttack}`;
-      document.getElementById('powerLevel').innerHTML = `<span class="stat">Power Level:</span> ${character.powerLevel}`;
-      document.getElementById('speed').innerHTML = `<span class="stat">Speed:</span> ${character.speed}`;
-      document.getElementById('durability').innerHTML = `<span class="stat">Durability:</span> ${character.durability}`;
-      document.getElementById('agility').innerHTML = `<span class="stat">Agility:</span> ${character.agility}`;
+  document.getElementById('race').innerHTML = `<span class="stat">Race:</span> ${character.race} <img src="pictures/${character.race.replace(/\s/g, '_')}.png" alt="${character.race}" style="width:32px;height:32px;object-fit:contain;vertical-align:middle;margin-left:6px;" onerror="this.style.display='none';">`;
+  document.getElementById('transformation').innerHTML = `<span class="stat">Transformation:</span> ${character.transformation} <img src="pictures/${character.transformation.replace(/\s/g, '_')}.png" alt="${character.transformation}" style="width:32px;height:32px;object-fit:contain;vertical-align:middle;margin-left:6px;" onerror="this.style.display='none';">`;
+  document.getElementById('power').innerHTML = `<span class="stat">Power:</span> ${character.power} <img src="pictures/${character.power.replace(/\s/g, '_')}.png" alt="${character.power}" style="width:32px;height:32px;object-fit:contain;vertical-align:middle;margin-left:6px;" onerror="this.style.display='none';">`;
+  document.getElementById('attack').innerHTML = `<span class="stat">Attack:</span> ${character.attack} <img src="pictures/Attack.png" alt="Attack" style="width:32px;height:32px;object-fit:contain;vertical-align:middle;margin-left:6px;" onerror="this.style.display='none';">`;
+  document.getElementById('defense').innerHTML = `<span class="stat">Defense:</span> ${character.defense} <img src="pictures/Defense.png" alt="Defense" style="width:32px;height:32px;object-fit:contain;vertical-align:middle;margin-left:6px;" onerror="this.style.display='none';">`;
+  document.getElementById('specialAttack').innerHTML = `<span class="stat">Special Attack:</span> ${character.specialAttack} <img src="pictures/SpecialAttack.png" alt="Special Attack" style="width:32px;height:32px;object-fit:contain;vertical-align:middle;margin-left:6px;" onerror="this.style.display='none';">`;
+  document.getElementById('powerLevel').innerHTML = `<span class="stat">Power Level:</span> ${character.powerLevel} <img src="pictures/PowerLevel.png" alt="Power Level" style="width:32px;height:32px;object-fit:contain;vertical-align:middle;margin-left:6px;" onerror="this.style.display='none';">`;
+  document.getElementById('speed').innerHTML = `<span class="stat">Speed:</span> ${character.speed} <img src="pictures/${character.speed.replace(/\s/g, '_')}.png" alt="${character.speed}" style="width:32px;height:32px;object-fit:contain;vertical-align:middle;margin-left:6px;" onerror="this.style.display='none';">`;
+  document.getElementById('durability').innerHTML = `<span class="stat">Durability:</span> ${character.durability} <img src="pictures/${character.durability.replace(/\s/g, '_')}.png" alt="${character.durability}" style="width:32px;height:32px;object-fit:contain;vertical-align:middle;margin-left:6px;" onerror="this.style.display='none';">`;
+  document.getElementById('agility').innerHTML = `<span class="stat">Agility:</span> ${character.agility} <img src="pictures/${character.agility.replace(/\s/g, '_')}.png" alt="${character.agility}" style="width:32px;height:32px;object-fit:contain;vertical-align:middle;margin-left:6px;" onerror="this.style.display='none';">`;
+      document.getElementById('luck').innerHTML = `<span class="stat">Luck:</span> ${character.luck} <img src="pictures/Luck.png" alt="Luck" style="width:32px;height:32px;object-fit:contain;vertical-align:middle;margin-left:6px;" onerror="this.style.display='none';">`;
+      document.getElementById('intelligence').innerHTML = `<span class="stat">Intelligence:</span> ${character.intelligence} <img src="pictures/Intelligence.png" alt="Intelligence" style="width:32px;height:32px;object-fit:contain;vertical-align:middle;margin-left:6px;" onerror="this.style.display='none';">`;
       gameDiv.style.display = 'none';
       const resultsDiv = document.getElementById('results');
       resultsDiv.classList.add('results-with-bg');
@@ -467,14 +710,60 @@ const universes = [
       presentChallenge();
     }
     document.getElementById('backBtnResults').onclick = function() {
-      document.getElementById('results').style.display = 'none';
-      showAgilitySelection();
+  document.getElementById('results').style.display = 'none';
+  goBackStep();
     };
     // Generate and evaluate a story challenge with a villain
     function presentChallenge() {
       document.getElementById('challenge').style.display = 'block';
       document.getElementById('backBtnChallenge').style.display = '';
       document.getElementById('challengeAnotherBtn').style.display = 'none';
+      // Branching story choices
+      const storyChoices = [
+        {
+          text: "Do you save the village or chase the villain?",
+          options: [
+            { label: "Save the village", effect: () => { character.luck += 1; return "You save the village and gain good fortune! (+1 Luck)"; } },
+            { label: "Chase the villain", effect: () => { character.agility += 1; return "You chase the villain, improving your agility! (+1 Agility)"; } }
+          ]
+        },
+        {
+          text: "You encounter a mysterious ally. Do you trust them?",
+          options: [
+            { label: "Trust", effect: () => { character.intelligence += 1; return "The ally helps you solve a puzzle! (+1 Intelligence)"; } },
+            { label: "Don't Trust", effect: () => { character.luck -= 1; return "The ally was a rival in disguise! (-1 Luck)"; } }
+          ]
+        }
+      ];
+      // Random story events
+      const randomEvents = [
+        { text: "You found a hidden power-up! (+1 Special Attack)", effect: () => { character.specialAttack += 1; } },
+        { text: "Ambushed by minions! (Roll Agility to escape)", effect: () => {
+            if (Math.random() * 10 < character.agility) {
+              return "You dodged the ambush!";
+            } else {
+              character.defense -= 1; return "You took a hit! (-1 Defense)";
+            }
+          }
+        },
+        { text: "You solve an ancient riddle. (Roll Intelligence)", effect: () => {
+            if (Math.random() * 10 < character.intelligence) {
+              character.luck += 1; return "You gain luck! (+1 Luck)";
+            } else {
+              return "You failed the riddle.";
+            }
+          }
+        }
+      ];
+      // Villain backstories
+      const villainBackstories = {
+        "Madara Uchiha": "Madara seeks to create a world free of pain, but at a terrible cost.",
+        "Orochimaru": "Orochimaru is obsessed with immortality and forbidden jutsu.",
+        "Pain": "Pain wants to end conflict by controlling all through fear.",
+        "Sasori": "Sasori turns humans into puppets to escape loneliness.",
+        "Kakuzu": "Kakuzu fights for wealth, having outlived his own humanity.",
+        // ...add more for other universes as desired...
+      };
       const challenges = [
         `You face off against {villain} in the ${character.universe} universe. Can you defeat them in combat?`,
         `A catastrophic event orchestrated by {villain} threatens the world of ${character.universe}. Do you have what it takes to stop them?`,
@@ -482,7 +771,45 @@ const universes = [
         `The legendary {villain} awakens in the ${character.universe} realm. Can you stop their rampage?`,
         `A rival force led by {villain} from the ${character.universe} world seeks to destroy you. Will you emerge victorious?`
       ];
-      villain.name = randomSelect(currentUniverse.villains);
+      // Show random event between boss fights
+      if (defeatedVillains.length > 0 && Math.random() < 0.5) {
+        const event = randomEvents[Math.floor(Math.random() * randomEvents.length)];
+        let eventResult = event.effect();
+        alert(event.text + (eventResult ? "\n" + eventResult : ""));
+      }
+      // Only pick from villains not yet defeated
+      let availableVillains = currentUniverse.villains.filter(v => !defeatedVillains.includes(v));
+      if (availableVillains.length === 0) {
+        // All bosses defeated, show summary
+        document.getElementById('challengeText').textContent = `Congratulations! You have defeated all bosses in the ${character.universe} universe!`;
+        document.getElementById('villainStats').innerHTML = '';
+        document.getElementById('combatLog').innerHTML = '';
+        document.getElementById('challengeResult').innerHTML = `<span class="stat">Result:</span> Victory!`;
+        document.getElementById('fightConclusion').textContent = `Bosses defeated: ${defeatedVillains.length} / ${currentUniverse.villains.length}`;
+        document.getElementById('challengeAnotherBtn').style.display = 'none';
+        // Add Show Character Summary button if not already present
+        let summaryBtn = document.getElementById('showSummaryBtn');
+        if (!summaryBtn) {
+          summaryBtn = document.createElement('button');
+          summaryBtn.id = 'showSummaryBtn';
+          summaryBtn.textContent = 'Show Character Summary';
+          summaryBtn.style.marginTop = '10px';
+          summaryBtn.onclick = function() {
+            document.getElementById('challenge').style.display = 'none';
+            document.getElementById('results').style.display = 'block';
+          };
+          document.getElementById('challenge').appendChild(summaryBtn);
+        }
+        return;
+      }
+      // For the first challenge, use the preview villain
+      if (defeatedVillains.length === 0 && currentUniverse._previewVillain) {
+        villain.name = currentUniverse._previewVillain;
+        // Remove so it's not reused
+        delete currentUniverse._previewVillain;
+      } else {
+        villain.name = randomSelect(availableVillains);
+      }
       villain.attack = Math.floor(Math.random() * 10) + 1;
       villain.defense = Math.floor(Math.random() * 10) + 1;
       villain.specialAttack = Math.floor(Math.random() * 10) + 1;
@@ -502,20 +829,43 @@ const universes = [
         <span class="stat">Durability Value:</span> ${villain.durabilityValue}<br>
         <span class="stat">Agility Value:</span> ${villain.agilityValue}
       `;
+      // Show villain backstory if available
+      let backstory = villainBackstories[villain.name];
+      if (backstory) {
+        document.getElementById('challengeText').innerHTML = `<b>Backstory:</b> ${backstory}`;
+      }
       runCombat();
+      // Only show branching story path if last fight was a win
+      if (typeof presentChallenge.lastResult === 'undefined' || presentChallenge.lastResult === 'win') {
+        if (Math.random() < 0.5) {
+          const story = storyChoices[Math.floor(Math.random() * storyChoices.length)];
+          let choiceText = story.text;
+          let optionsHtml = story.options.map((opt, idx) => `<button class='random-btn' id='storyOpt${idx}'>${opt.label}</button>`).join(' ');
+          let storyDiv = document.createElement('div');
+          storyDiv.innerHTML = `<div style='margin:10px 0;'><b>${choiceText}</b><br>${optionsHtml}</div>`;
+          document.getElementById('challenge').appendChild(storyDiv);
+          story.options.forEach((opt, idx) => {
+            document.getElementById('storyOpt'+idx).onclick = function() {
+              let result = opt.effect();
+              alert(result);
+              storyDiv.remove();
+            };
+          });
+        }
+      }
     }
     document.getElementById('backBtnChallenge').onclick = function() {
-      document.getElementById('challenge').style.display = 'none';
-      document.getElementById('results').style.display = 'block';
+  document.getElementById('challenge').style.display = 'none';
+  goBackStep();
     };
     // Interactive combat log
     function runCombat() {
       const logDiv = document.getElementById('combatLog');
       logDiv.innerHTML = "";
-      let charHP = character.defense * 10 + character.durabilityValue * 10;
+      let charHP = character.defense * 10 + character.durabilityValue * 10 + character.luck * 2;
       let villainHP = villain.defense * 10 + villain.durabilityValue * 10;
       let turn = 1;
-      let charSpeed = character.speedValue + character.agilityValue;
+      let charSpeed = character.speedValue + character.agilityValue + character.luck;
       let villainSpeed = villain.speedValue + villain.agilityValue;
       let charFirst = charSpeed >= villainSpeed;
       let combatRounds = [];
@@ -541,6 +891,19 @@ const universes = [
         }
         let useSpecial = Math.random() < 0.3;
         let damage = useSpecial ? spcStat * 2 + Math.floor(Math.random() * 10) : atkStat + Math.floor(Math.random() * 10);
+        // Stat-based effects
+        if (attacker === character && character.luck > 7 && Math.random() < 0.2) {
+          damage += 5; combatRounds.push("Lucky hit! (+5 damage)");
+        }
+        if (attacker === character && character.intelligence > 7 && Math.random() < 0.2) {
+          damage += 5; combatRounds.push("Smart tactic! (+5 damage)");
+        }
+        if (attacker === character && character.agility > 7 && Math.random() < 0.2) {
+          damage += 3; combatRounds.push("Agile move! (+3 damage)");
+        }
+        if (defender === character && character.speedValue > 7 && Math.random() < 0.2) {
+          damage = 0; combatRounds.push("You dodged the attack!");
+        }
         damage -= defStat;
         if (damage < 1) damage = 1;
         if (defender === villain) {
@@ -559,25 +922,104 @@ const universes = [
         logDiv.innerHTML += line + "<br>";
       });
       let result, fightConclusion;
+      let playerWon = false;
       if (winner === "character") {
+        playerWon = true;
+        // Mark villain as defeated
+        if (!defeatedVillains.includes(villain.name)) defeatedVillains.push(villain.name);
         result = "Success! Your strength and abilities have overcome the villain!";
         fightConclusion = `You defeated ${villain.name} after a fierce battle!`;
         document.getElementById('challengeAnotherBtn').style.display = '';
         document.getElementById('challengeAnotherBtn').onclick = () => {
-          presentChallenge();
+          // Stat upgrade after victory with button popup
+          const statOptions = [
+            { key: 'attack', label: 'Attack' },
+            { key: 'defense', label: 'Defense' },
+            { key: 'specialAttack', label: 'Special Attack' },
+            { key: 'speedValue', label: 'Speed' },
+            { key: 'durabilityValue', label: 'Durability' },
+            { key: 'agility', label: 'Agility' },
+            { key: 'luck', label: 'Luck' },
+            { key: 'intelligence', label: 'Intelligence' }
+          ];
+          let upgradeDiv = document.createElement('div');
+          upgradeDiv.style.background = 'rgba(24,24,24,0.98)';
+          upgradeDiv.style.border = '2px solid #ffb347';
+          upgradeDiv.style.borderRadius = '10px';
+          upgradeDiv.style.padding = '18px 10px 10px 10px';
+          upgradeDiv.style.position = 'fixed';
+          upgradeDiv.style.left = '50%';
+          upgradeDiv.style.top = '50%';
+          upgradeDiv.style.transform = 'translate(-50%, -50%)';
+          upgradeDiv.style.zIndex = '9999';
+          upgradeDiv.style.boxShadow = '0 4px 24px #0008';
+          upgradeDiv.innerHTML = `<b>Victory! Choose a stat to upgrade:</b><br><div id='upgradeBtns'></div>`;
+          document.body.appendChild(upgradeDiv);
+          const btnsDiv = upgradeDiv.querySelector('#upgradeBtns');
+          statOptions.forEach(opt => {
+            let btn = document.createElement('button');
+            btn.textContent = opt.label;
+            btn.className = 'random-btn';
+            btn.style.margin = '6px 8px 0 0';
+            btn.onclick = () => {
+              character[opt.key]++;
+              upgradeDiv.remove();
+              presentChallenge();
+            };
+            btnsDiv.appendChild(btn);
+          });
         };
       } else if (winner === "villain") {
+        playerWon = false;
         result = "Failure... The villain was too powerful, but you can try again with a new character.";
         fightConclusion = `${villain.name} has defeated you. Train harder and try again!`;
         document.getElementById('challengeAnotherBtn').style.display = 'none';
       } else {
         // If both are alive after 10 rounds, compare HP for winner
-        if (charHP > villainHP) {
+        playerWon = (charHP > villainHP);
+        if (playerWon) {
+          if (!defeatedVillains.includes(villain.name)) defeatedVillains.push(villain.name);
           result = "Success! Your strength and abilities have overcome the villain!";
           fightConclusion = `You defeated ${villain.name} after a fierce battle!`;
           document.getElementById('challengeAnotherBtn').style.display = '';
           document.getElementById('challengeAnotherBtn').onclick = () => {
-            presentChallenge();
+            // Stat upgrade after victory with button popup
+            const statOptions = [
+              { key: 'attack', label: 'Attack' },
+              { key: 'defense', label: 'Defense' },
+              { key: 'specialAttack', label: 'Special Attack' },
+              { key: 'speedValue', label: 'Speed' },
+              { key: 'durabilityValue', label: 'Durability' },
+              { key: 'agility', label: 'Agility' },
+              { key: 'luck', label: 'Luck' },
+              { key: 'intelligence', label: 'Intelligence' }
+            ];
+            let upgradeDiv = document.createElement('div');
+            upgradeDiv.style.background = 'rgba(24,24,24,0.98)';
+            upgradeDiv.style.border = '2px solid #ffb347';
+            upgradeDiv.style.borderRadius = '10px';
+            upgradeDiv.style.padding = '18px 10px 10px 10px';
+            upgradeDiv.style.position = 'fixed';
+            upgradeDiv.style.left = '50%';
+            upgradeDiv.style.top = '50%';
+            upgradeDiv.style.transform = 'translate(-50%, -50%)';
+            upgradeDiv.style.zIndex = '9999';
+            upgradeDiv.style.boxShadow = '0 4px 24px #0008';
+            upgradeDiv.innerHTML = `<b>Victory! Choose a stat to upgrade:</b><br><div id='upgradeBtns'></div>`;
+            document.body.appendChild(upgradeDiv);
+            const btnsDiv = upgradeDiv.querySelector('#upgradeBtns');
+            statOptions.forEach(opt => {
+              let btn = document.createElement('button');
+              btn.textContent = opt.label;
+              btn.className = 'random-btn';
+              btn.style.margin = '6px 8px 0 0';
+              btn.onclick = () => {
+                character[opt.key]++;
+                upgradeDiv.remove();
+                presentChallenge();
+              };
+              btnsDiv.appendChild(btn);
+            });
           };
         } else if (villainHP > charHP) {
           result = "Failure... The villain was too powerful, but you can try again with a new character.";
@@ -588,6 +1030,10 @@ const universes = [
           fightConclusion = "Neither side could claim victory. It's a stalemate!";
           document.getElementById('challengeAnotherBtn').style.display = 'none';
         }
+      }
+      // Show defeated boss count if at least one defeated
+      if (defeatedVillains.length > 0) {
+        fightConclusion += ` | Bosses defeated: ${defeatedVillains.length} / ${currentUniverse.villains.length}`;
       }
       document.getElementById('challengeResult').innerHTML = `<span class="stat">Result:</span> ${result}`;
       document.getElementById('fightConclusion').textContent = fightConclusion;
@@ -604,56 +1050,65 @@ const universes = [
     }
     // Function to reset the game
     function resetGame() {
-      step = 0;
-      character = {
-        name: "",
-        universe: "", race: "", transformation: "", power: "",
-        attack: 0, defense: 0, specialAttack: 0, powerLevel: 0,
-        speed: "", speedValue: 0, durability: "", durabilityValue: 0, agility: "", agilityValue: 0
-      };
-      villain = {
-        name: "", attack: 0, defense: 0, specialAttack: 0, powerLevel: 0,
-        speedValue: 0, durabilityValue: 0, agilityValue: 0
-      };
-      document.getElementById('results').style.display = 'none';
-      document.getElementById('challenge').style.display = 'none';
-      document.getElementById('challenge').classList.remove('challenge-with-bg');
-      document.getElementById('challenge').style.backgroundImage = "";
-      document.getElementById('results').classList.remove('results-with-bg');
-      document.getElementById('results').style.backgroundImage = "";
-      document.getElementById('game').classList.remove('game-with-bg');
-      document.getElementById('game').style.backgroundImage = "";
-      gameDiv.style.display = 'block';
-      gameDiv.innerHTML = `<h2 id="currentStep">Click Start to Begin Your Journey!</h2>
-        <input type="text" id="charNameInput" placeholder="Enter your character's name" style="margin-bottom:10px;display:none;">
-        <button id="actionBtn">Start</button>`;
-      // Re-bind start button and name input
-      const actionBtnNew = document.getElementById('actionBtn');
-      const charNameInputNew = document.getElementById('charNameInput');
-      actionBtnNew.onclick = function () {
-        if (step === 0) {
-          document.getElementById('currentStep').textContent = "Enter Your Character's Name";
-          charNameInputNew.style.display = '';
-          actionBtnNew.textContent = "Continue";
-          step = 0.5;
-        } else if (step === 0.5) {
-          const name = charNameInputNew.value.trim();
-          if (!name) {
-            charNameInputNew.style.border = "2px solid red";
-            charNameInputNew.placeholder = "Please enter a name!";
-            return;
-          }
-          charNameInputNew.style.display = 'none';
-          actionBtnNew.style.display = 'none';
-          character.name = name;
-          step = 1;
-          showUniverseSelection();
-        }
-      };
-      document.getElementById('backBtnResults').style.display = 'none';
-      document.getElementById('backBtnChallenge').style.display = 'none';
-      document.getElementById('challengeAnotherBtn').style.display = 'none';
-    }
+  step = 0;
+  stepHistory = [];
+  choiceHistory = [];
+  character = {
+    name: "",
+    universe: "", race: "", transformation: "", power: "",
+    attack: 0, defense: 0, specialAttack: 0, powerLevel: 0,
+    speed: "", speedValue: 0, durability: "", durabilityValue: 0, agility: "", agilityValue: 0,
+    luck: 5, intelligence: 5
+  };
+  villain = {
+    name: "", attack: 0, defense: 0, specialAttack: 0, powerLevel: 0,
+    speedValue: 0, durabilityValue: 0, agilityValue: 0
+  };
+  defeatedVillains = [];
+  document.getElementById('results').style.display = 'none';
+  document.getElementById('challenge').style.display = 'none';
+  document.getElementById('challenge').classList.remove('challenge-with-bg');
+  document.getElementById('challenge').style.backgroundImage = "";
+  document.getElementById('results').classList.remove('results-with-bg');
+  document.getElementById('results').style.backgroundImage = "";
+  document.getElementById('game').classList.remove('game-with-bg');
+  document.getElementById('game').style.backgroundImage = "";
+  showStartScreen();
+  document.getElementById('backBtnResults').style.display = 'none';
+  document.getElementById('backBtnChallenge').style.display = 'none';
+  document.getElementById('challengeAnotherBtn').style.display = 'none';
+}
+// In resetGame, call showStartScreen instead of duplicating the logic
+function resetGame() {
+  step = 0;
+  stepHistory = [];
+  choiceHistory = [];
+  character = {
+    name: "",
+    universe: "", race: "", transformation: "", power: "",
+    attack: 0, defense: 0, specialAttack: 0, powerLevel: 0,
+    speed: "", speedValue: 0, durability: "", durabilityValue: 0, agility: "", agilityValue: 0,
+    luck: 5, intelligence: 5
+  };
+  villain = {
+    name: "", attack: 0, defense: 0, specialAttack: 0, powerLevel: 0,
+    speedValue: 0, durabilityValue: 0, agilityValue: 0
+  };
+  defeatedVillains = [];
+  document.getElementById('results').style.display = 'none';
+  document.getElementById('challenge').style.display = 'none';
+  document.getElementById('challenge').classList.remove('challenge-with-bg');
+  document.getElementById('challenge').style.backgroundImage = "";
+  document.getElementById('results').classList.remove('results-with-bg');
+  document.getElementById('results').style.backgroundImage = "";
+  document.getElementById('game').classList.remove('game-with-bg');
+  document.getElementById('game').style.backgroundImage = "";
+  showStartScreen();
+  document.getElementById('backBtnResults').style.display = 'none';
+  document.getElementById('backBtnChallenge').style.display = 'none';
+  document.getElementById('challengeAnotherBtn').style.display = 'none';
+}
+// On initial load, call showStartScreen instead of relying on inline HTML
+showStartScreen();
   </script>
 </body>
-</html>
